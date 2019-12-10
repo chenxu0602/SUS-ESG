@@ -1,0 +1,8 @@
+susseg:
+  container_name: susseg
+  hostname: susseg
+  restart: always
+  privileged: true
+  build: .
+  ports:
+      - "80:80"
