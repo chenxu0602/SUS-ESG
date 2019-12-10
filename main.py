@@ -3,7 +3,7 @@ import datetime
 
 from flask import Flask, render_template
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="templates")
 
 
 @app.route('/')
@@ -15,7 +15,7 @@ def root():
                    datetime.datetime(2018, 1, 3, 11, 0, 0),
                    ]
 
-    return render_template('home.html', times=dummy_times)
+    return render_template('index.html', times=dummy_times)
 
 
 if __name__ == '__main__':
