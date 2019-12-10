@@ -2,7 +2,9 @@
 import datetime
 
 from flask import Flask, render_template
+from multiprocessing import Value
 
+counter = Value('i', 0)
 app = Flask(__name__, template_folder="templates", static_folder="static")
 
 
@@ -10,9 +12,12 @@ app = Flask(__name__, template_folder="templates", static_folder="static")
 def root():
     # For the sake of example, use static information to inflate the template.
     # This will be replaced with real information in later steps.
-    dummy_times = [datetime.datetime.now()]
+    dummy_times = [datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")]
 
-    return render_template('home.html', times=dummy_times)
+    with counter.get_lock():
+        counter.value += 1
+
+    return render_template('home.html', times=dummy_times, counter=counter.value)
 
 
 if __name__ == '__main__':
