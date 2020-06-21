@@ -6,6 +6,7 @@ from multiprocessing import Value
 
 counter = Value('i', 0)
 app = Flask(__name__, template_folder="templates", static_folder="static")
+#app = Flask(__name__, template_folder="Site", static_folder="Site/*")
 
 
 @app.route('/')
@@ -18,6 +19,7 @@ def root():
         counter.value += 1
 
     return render_template('home.html', times=dummy_times, counter=counter.value)
+#    return render_template('index.html')
 
 
 if __name__ == '__main__':
